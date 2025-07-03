@@ -1291,6 +1291,19 @@ export default function Portfolio() {
                     />
                   </div>
                   <div>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                      required
+                      className={`w-full p-3 rounded-lg border transition-all duration-300 ${
+                        isDarkMode
+                          ? "bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-blue-400"
+                          : "bg-gray-900/10 border-gray-900/20 text-gray-900 placeholder-gray-500 focus:border-blue-600"
+                      } focus:outline-none focus:ring-2 focus:ring-blue-400/50`}
+                    />
+                  </div>
+                  <div>
                     <textarea
                         name="message"
                       placeholder="Your Message"
