@@ -100,7 +100,23 @@ Interests: ["Cybersecurity", "Web Dev", "DSA", "Music"]
   const executeCommand = (cmd: string, section: string) => {
     setCurrentCommand("")
     if (section === "resume") {
-      // Resume download disabled
+      // Show a realistic terminal response and trigger download
+      setCommandHistory((prev) => [
+        ...prev,
+        {
+          command: cmd,
+          response: `Reading package lists... Done\nBuilding dependency tree... Done\nThe following NEW package will be installed:\n  kushagra-resume\n0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.\nNeed to get 1.2 MB of archives.\nAfter this operation, 1.2 MB of additional disk space will be used.\nGet:1 https://kushagra-gupta.vercel.app/ stable/main kushagra-resume amd64 [1.2 MB]\nFetched 1.2 MB in 0s (3.2 MB/s)\nSelecting previously unselected package kushagra-resume.\n(Reading database ... 100%)\nPreparing to unpack .../kushagra-resume.deb ...\nUnpacking kushagra-resume (1.0.0) ...\nSetting up kushagra-resume (1.0.0) ...\nProcessing triggers for man-db (2.8.3-2ubuntu0.1) ...\n\x1b[32mResume downloaded!\x1b[0m` // green text for success
+        },
+      ])
+      // Trigger the download
+      if (typeof window !== 'undefined') {
+        const link = document.createElement('a')
+        link.href = '/Kushagra%20Gupta%20Resume.pdf'
+        link.download = 'Kushagra Gupta Resume.pdf'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
       return
     }
     const element = document.getElementById(section)
@@ -588,17 +604,19 @@ export default function Portfolio() {
                 CONTACT ME
               </motion.div>
             </Link>
-            <div
-              className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 opacity-60 cursor-not-allowed border-2 border-dashed ${
+            <a
+              href="/Kushagra%20Gupta%20Resume.pdf"
+              download
+              className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 border-2 border-dashed ${
                 isDarkMode
-                  ? "bg-gradient-to-r from-blue-400 to-cyan-500 text-black border-blue-400"
-                  : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white border-blue-600"
+                  ? "bg-gradient-to-r from-blue-400 to-cyan-500 text-black border-blue-400 hover:opacity-90"
+                  : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white border-blue-600 hover:opacity-90"
               }`}
-              title="Resume download temporarily unavailable"
+              title="Download my resume"
             >
               <Download size={20} />
               <span>RESUME</span>
-            </div>
+            </a>
           </motion.div>
         </motion.div>
 
